@@ -1,4 +1,4 @@
 #!/bin/sh
-rm -r /home/pi/.node-red/flows_raspberrypi.json
-mv /home/pi/.node-red/run/flows_raspberrypi2.json /home/pi/.node-red/flows_raspberrypi.json
+rm -r /root/.node-red/flows_SuperNode001.json
+mv /root/.node-red/run/flows_raspberrypi2.json /root/.node-red/flows_SuperNode001.json
 exit 0
