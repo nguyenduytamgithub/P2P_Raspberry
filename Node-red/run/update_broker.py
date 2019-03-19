@@ -4,18 +4,19 @@ import json
 
  
 try:  
-		f0=open("/root/.node-red/run/id_broker.txt", "rb")
-		id_broker = f0.read().replace('\n','')  
+		with open("/root/.node-red/run/ip_broker.json", "rb") as json_broker:
+			broker_data = json.load(json_broker)
+			id_broker = broker_data['id_server']
+			ip_broker = broker_data['ip_server']		   
 		with open("/root/.node-red/flows_SuperNode001.json", "rb") as json_main: 
 			json_data = json.load(json_main)
 			for item in json_data:
-				if item['id'] in ["elefos_mqtt_request"]:
-					item['broker'] = id_broker
-					print(item['broker'])
-				if item['id'] in ["elefos_mqtt_response"]:
-					item['broker'] = id_broker  
+				if item['id'] in [id_broker]:
+					item['broker'] = ip_broker
+					print(item['broker'])  
 		with open('/root/.node-red/flows_SuperNode001.json', 'w') as file:
 			json.dump(json_data, file, indent=2)
 		
 except KeyboardInterrupt:
     pass
+
