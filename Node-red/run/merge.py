@@ -2,15 +2,17 @@
 import os
 import sys
 import json
+import socket
 
 def insertChar(mystring, position, chartoinsert ):
 	#longi = len(mystring)
 	mystring   =  mystring[:position] + chartoinsert + mystring[position:] 
 	return mystring  
 try:  
+		hostname = socket.gethostname().replace('\n','')
 		f0=open("/root/.node-red/run/id_broker.txt", "rb")
 		id_broker = f0.read().replace('\n','')  
-		with open("/root/.node-red/flows_SuperNode001.json", "rb") as json_main: 
+		with open("/root/.node-red/flows_" + hostname + ".json", "rb") as json_main: 
 			json_data = json.load(json_main)
 			for item in json_data:
 				if item['id'] in ["elefos_mqtt_request"]:
@@ -18,9 +20,9 @@ try:
 					print(item['broker'])
 				if item['id'] in ["elefos_mqtt_response"]:
 					item['broker'] = id_broker  
-		with open('/root/.node-red/flows_SuperNode001.json', 'w') as file:
+		with open("/root/.node-red/flows_" + hostname + ".json", 'w') as file:
 			json.dump(json_data, file, indent=2)
-		f1=open("/root/.node-red/flows_SuperNode001.json", "rb") 
+		f1=open("/root/.node-red/flows_" + hostname + ".json", "rb") 
 		f2=open("/root/.node-red/run/mqtt_broker.json", "rb") 
 		f3=open("/root/.node-red/run/flows_raspberrypi2.json","w")
 		string1 = f1.read().replace('\n','')

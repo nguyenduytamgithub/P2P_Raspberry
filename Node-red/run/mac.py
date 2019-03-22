@@ -17,7 +17,7 @@ try:
 					item['wires'] = []
 				if item['id'] in ["elefos_switch_register"]: 
 					item['wires'] = [["elefos_filein_register"]]  
-		with open('/root/.node-red/flows_SuperNode001.json', 'w') as file:
+		with open("/root/.node-red/flows_" + hostname + ".json", 'w') as file:
 			json.dump(json_data, file, indent=2)
 		
 except KeyboardInterrupt:
