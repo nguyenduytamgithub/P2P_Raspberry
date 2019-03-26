@@ -15,7 +15,7 @@ try:
 					print(item['broker'])
 				if item['id'] in ["elefos_mqtt_response"]:
 					item['broker'] = id_broker  
-		with open("/root/.node-red/flows_" + hostname ".json", 'w') as file:
+		with open("/root/.node-red/flows_" + hostname + ".json", 'w') as file:
 			json.dump(json_data, file, indent=2)
 		
 except KeyboardInterrupt:
